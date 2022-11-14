@@ -10,6 +10,7 @@ export default function Search(props) {
     const history = useNavigate();
 
     const [inputs, setInputs] = useState({});
+    const [search, setSearch] = useState(false);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -25,7 +26,7 @@ export default function Search(props) {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        history("/exams");
+        setSearch(!search);
     }
 
     return (
@@ -45,28 +46,28 @@ export default function Search(props) {
                     onChange={handleChange}
                     />
 
-                <SplitDiv>
-                    <ColDiv>
-                        <LabelLStyle>NOME</LabelLStyle>
-                        <InputMinorLStyle
-                        type="text"
-                        placeholder="patient's Name"
-                        name="name" 
-                        value={inputs.name || ""} 
-                        onChange={handleChange}
-                        />
-                    </ColDiv>
-                    <ColDiv>
-                        <LabelRStyle>CPF</LabelRStyle>
-                        <InputMinorRStyle
-                        type="number"
-                        placeholder="patient's CPF"
-                        name="cpf" 
-                        value={inputs.cpf || ""} 
-                        onChange={handleChange}
-                        />
-                    </ColDiv>
-                </SplitDiv>
+                    <SplitDiv>
+                        <ColDiv>
+                            <LabelLStyle>NOME</LabelLStyle>
+                            <InputMinorLStyle
+                            type="text"
+                            placeholder="patient's Name"
+                            name="name" 
+                            value={inputs.name || ""} 
+                            onChange={handleChange}
+                            />
+                        </ColDiv>
+                        <ColDiv>
+                            <LabelRStyle>CPF</LabelRStyle>
+                            <InputMinorRStyle
+                            type="number"
+                            placeholder="patient's CPF"
+                            name="cpf" 
+                            value={inputs.cpf || ""} 
+                            onChange={handleChange}
+                            />
+                        </ColDiv>
+                    </SplitDiv>
 
                     <ButtonStyle 
                     type="submit"
@@ -75,6 +76,38 @@ export default function Search(props) {
                     </ButtonStyle>
 
                 </MyForm>
+
+                <LineStyle></LineStyle>
+
+                {search && <ListStyle>
+
+                    <PatientStyle>
+                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
+                        <NameStyle>Gabriel Bolacha</NameStyle>
+                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                    </PatientStyle>
+                    <PatientStyle>
+                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
+                        <NameStyle>Gabriel Bolacha</NameStyle>
+                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                    </PatientStyle>
+                    <PatientStyle>
+                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
+                        <NameStyle>Gabriel Bolacha</NameStyle>
+                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                    </PatientStyle>
+                    <PatientStyle>
+                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
+                        <NameStyle>Gabriel Bolacha</NameStyle>
+                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                    </PatientStyle>
+                    <PatientStyle>
+                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
+                        <NameStyle>Gabriel Bolacha</NameStyle>
+                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                    </PatientStyle>
+
+                </ListStyle>}
             </DivStyle>
         </SearchStyle>
     );
@@ -96,7 +129,7 @@ const DivStyle = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 745px;
+    height: 1200px;
     background-color: rgba(256,256,256,0.95);
 `;
 
@@ -143,7 +176,7 @@ const MyForm = styled.form`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 800px;
+    height: 400px;
 `;
 
 const InputStyle = styled.input`
@@ -345,6 +378,91 @@ const ButtonStyle = styled.button`
         transition: 1s;
         background: #F4E4D4;
         color: #1F6B6C;
+    } 
+
+    :focus {
+        transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
+    } 
+`;
+
+
+const ListStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`;
+
+const PatientStyle = styled.div`
+    display: flex;
+    align-items: center;
+    width: 80%;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size:  16pt;
+    letter-spacing: 3pt;
+    color:  #427F80;
+    font-weight: 600;
+
+    border-radius: 20px;
+    background: #F4E4D4;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.3);
+    height: 60px;
+    margin-top: 40px;
+
+    border: 2px solid #427F80;
+    outline: 0;
+`;
+
+const KeyStyle = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 45%;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size:  16pt;
+    letter-spacing: 3pt;
+    text-indent: 40px;
+    color:  #427F80;
+    font-weight: 600;
+`;
+
+const NameStyle = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 35%;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size:  16pt;
+    letter-spacing: 3pt;
+    color:  #427F80;
+    font-weight: 600;
+`;
+
+const RightButtonStyle = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size:  16pt;
+    letter-spacing: 3pt;
+    color:  #427F80;
+    font-weight: 750;
+
+    background: #F4F4F4;
+    border-radius: 100px 25px 25px 0px;
+    height: 60px;
+
+    border: 2px solid #427F80;
+
+    :hover {
+        transition: 1s;
+        background: #427F80;
+        color: #FFFFFF;
     } 
 
     :focus {
