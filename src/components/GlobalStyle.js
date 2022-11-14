@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle `
     *{
         box-sizing: border-box;
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Open Sans', sans-serif;
     }
     a{
         text-decoration: none;
@@ -35,12 +35,10 @@ const GlobalStyle = createGlobalStyle `
     }
     body {
         line-height: 1;
-        font-family: 'Roboto', sans-serif;
-        background: #A800FF;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        justify-content:center;
+        font-family: 'Open Sans', sans-serif;
+        background: #1F6B6C;
+        margin-left: 0;
+        margin-right: 0;
     }
     ol, ul {
         list-style: none;
