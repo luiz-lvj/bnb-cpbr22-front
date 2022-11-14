@@ -5,21 +5,19 @@ import logoGreen from '../imgs/MedSync_Logo.png';
 import signHealth from '../imgs/sign_health.png';
 import menuPhoto from '../imgs/menu_photo.png';
 import styled from 'styled-components';
+import axios from "axios";
 
 
 export default function Login(props){
 
     const history = useNavigate();
 
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({username: '', password:''});
 
     const handleChange = (event) => {
         event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
-        if(name == "username"){
-            props.setUserName(value);
-        }
         // setInputs({
         //     'username': name == 'username' ? value : '',
         //     'email': name == 'email' ? value : '',
@@ -30,7 +28,21 @@ export default function Login(props){
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        history("/start");
+        if(inputs.username == "" || inputs.password == ""){
+            alert("Preencha os campos!");
+            return;
+        }
+        const strLogin = "http://localhost:4000/login/" + inputs.username + "/" + inputs.password;
+        
+        const promise = axios.post(strLogin).then(res => {
+            console.log(res.data)
+            props.setHospital(res.data);
+            history("/start");
+        }).catch(err =>{
+            console.log(err);
+            alert("Username ou senha errados!");
+        })
+        
     }
 
     return(
@@ -59,7 +71,7 @@ export default function Login(props){
                     type="text"
                     placeholder="your username"
                     name="username" 
-                    value={inputs.username || ""} 
+                    value={inputs.username} 
                     onChange={handleChange}
                     />
 
@@ -69,7 +81,7 @@ export default function Login(props){
                     type="password"
                     placeholder="your password"
                     name="password" 
-                    value={inputs.password || ""} 
+                    value={inputs.password} 
                     onChange={handleChange}
                     />
 

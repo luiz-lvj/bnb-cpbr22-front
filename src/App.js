@@ -11,12 +11,12 @@ import { useState } from "react";
 
 
 function App() {
-  const [userName, setUserName] = useState("Bryan Borck");
+  const [hospital, setHospital] = useState({});
   return (
     <BrowserRouter>
       <GlobalStyle/>
       <Routes>
-        <Route path="/"  element={<Login   setUserName={setUserName} />} />
+        <Route path="/"  element={<Login   setHospital={setHospital} />} />
         <Route path="/start"  element={<Start/>} />
         <Route path="/search"  element={<Search/>} />
         <Route path="/dashboard"  element={<Dash/>} />

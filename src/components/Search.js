@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import bkg from '../imgs/geometric_background.png';
 import Header from "./Header";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState} from "react";
+import axios from "axios";
 
 export default function Search(props) {
+    const [users, setUsers] = useState([])
 
     const history = useNavigate();
+    useEffect(() => {
+        const url = "http://localhost:4000/usuarios/1";
+        axios.get(url).then(res => {
+            console.log(res.data);
+            setUsers(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [])
 
     const [inputs, setInputs] = useState({});
     const [search, setSearch] = useState(false);
@@ -81,7 +92,16 @@ export default function Search(props) {
 
                 {search && <ListStyle>
 
-                    <PatientStyle>
+                    {users.map((user,idx) => {
+                        return(
+                            <PatientStyle key={idx}>
+                                <KeyStyle>{user.public_key}</KeyStyle>
+                                <NameStyle>{user.nome}</NameStyle>
+                                <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
+                            </PatientStyle>
+                        );
+                    })}
+                    {/*<PatientStyle>
                         <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
                         <NameStyle>Gabriel Bolacha</NameStyle>
                         <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
@@ -100,12 +120,7 @@ export default function Search(props) {
                         <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
                         <NameStyle>Gabriel Bolacha</NameStyle>
                         <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
-                    </PatientStyle>
-                    <PatientStyle>
-                        <KeyStyle>fnskjnfi3ho123urfniu32en</KeyStyle>
-                        <NameStyle>Gabriel Bolacha</NameStyle>
-                        <RightButtonStyle onClick={() => history("/exams")}>ACESSAR</RightButtonStyle>
-                    </PatientStyle>
+                </PatientStyle>*/}
 
                 </ListStyle>}
             </DivStyle>
@@ -419,7 +434,7 @@ const KeyStyle = styled.div`
     justify-content: left;
     align-items: center;
     width: 45%;
-
+    overflow: hidden;
     font-family: 'Open Sans', sans-serif;
     font-size:  16pt;
     letter-spacing: 3pt;
